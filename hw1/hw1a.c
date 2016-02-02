@@ -23,6 +23,7 @@ int main()
 	
 	printf("Enter a %d digit credit card number: ", MAX_DIGITS);
 	
+	//Get the credit card number
 	int i;
 	for(i = 0; i < MAX_DIGITS; i++){
 	
@@ -30,11 +31,13 @@ int main()
 	
 	}
 	
+	//Calculate the even and odd-indexed values
 	int evenSum = addEvenDigits(cardToTest);
 	int oddSum = addOddDigits(cardToTest);
 	
 	printf("Even sum:%d\nOdd sum:%d\n", evenSum, oddSum);
 	
+	//Calculate total sum
 	int totalSum = evenSum + oddSum;
 	
 	printf("Total sum: %d\n", totalSum);
@@ -42,6 +45,7 @@ int main()
 	printf("Remainer when divided by 10: %d\n", totalSum%10);
 	printf("Valid card:");
 	
+	//The number is valid iff the number is divisible by 10
 	if(totalSum%10 == 0)
 		printf("YES");
 	else
