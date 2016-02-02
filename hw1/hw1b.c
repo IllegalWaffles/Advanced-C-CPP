@@ -29,7 +29,7 @@ int main()
 	{
 		
 		//Little bit of input validation
-		if(c-'a' > 0 || c-'a' < 26)
+		if(c-'a' >= 0 && c-'a' < 26)
 			bucket[c-'a']++;
 		
 	}
