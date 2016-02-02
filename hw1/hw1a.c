@@ -21,9 +21,14 @@ int main()
 	
 	char cardToTest[MAX_DIGITS];
 	
+	printf("Enter a %d digit credit card number: ", MAX_DIGITS);
+	
 	int i;
-	for(i = 0; i < 16; i++)
+	for(i = 0; i < MAX_DIGITS; i++){
+	
 		cardToTest[i] = getchar();
+	
+	}
 	
 	int evenSum = addEvenDigits(cardToTest);
 	int oddSum = addOddDigits(cardToTest);
