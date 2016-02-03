@@ -54,11 +54,14 @@ int main()
 //Returns 0-25 for A-Z, case insensitive.
 int convertCharToInt(char input)
 {
-	
+
+	//If the char is in the lowercase range, return that.	
 	if(input-'a' >= 0 && input-'a' < 26)
 		return input-'a';
+	//Otherwise if it's in the uppercase range, return that.
 	else if(input-'A' >= 0 && input-'A' < 26)
 		return input-'A';
+	//Character was out of bounds. Return -1.
 	else 
 		return -1;
 	
