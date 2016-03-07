@@ -3,19 +3,22 @@
 #include "hw2functions.h"
 
 /*
- *	Kuba Gasiorowski, kgasiorowski, 109776237
- *
+ *	Kuba Gasiorowski, kgasiorowski, 109776237, kuba.gasiorowski@stonybrook.edu
+ *	
+ *  Contains definitions for all functions used in this program.
  *
  */
 
-//Returns the number of students contained in a file
+//Returns the number of students contained in a file,
+//based on the fact that each student is on its seperate
+//line.
 int getNumStudents(FILE *inFile){
 	
-	int numStudents = 0;
+	int numStudents = 1;
 	char c;
 	
 	while((c = getc(inFile)) != EOF)
-		if(c == '=')
+		if(c == '\n')
 			numStudents++;
 			
 	rewind(inFile);
@@ -59,7 +62,7 @@ void printStudentHeader(){
 	
 }
 
-//Compares two student objects by last name
+//Compares two student objects by last name.
 int compare(const void *a, const void *b){
 	
 	Student A = *(Student*)a, B = *(Student*)b;

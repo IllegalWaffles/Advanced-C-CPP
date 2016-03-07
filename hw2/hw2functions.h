@@ -1,3 +1,9 @@
+/*
+ *	Kuba Gasiorowski, kgasiorowski, 109776237, kuba.gasiorowski@stonybrook.edu
+ *
+ *	Includes definition of the Student struct as well as headers for all functions.
+ */
+
 typedef struct Student{
 	
 	int term, id, catalogNumber;
@@ -5,6 +11,7 @@ typedef struct Student{
 	
 }Student;
 
+//See each implementation for detailed comments.
 int getNumStudents(FILE*);
 void printStudents(Student[], int);
 void printStudentHeader();
