@@ -1,4 +1,4 @@
-hw3: main.o
-	gcc -o hw3 main.o
-main.o:
-	gcc -c main.c
+hw3: hw3.o
+
+clean:
+	rm -f *.o
