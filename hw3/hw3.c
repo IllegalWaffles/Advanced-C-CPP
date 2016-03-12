@@ -1,15 +1,16 @@
-#include <stdio.h>
-#include <string.h>
-#define MAX_NAME_SIZE 100
+#include "hw3func.h"
+#define debug
 
-
-int main(int argc, char *argv[])
+int main()
 {
 
-	char sourceName[MAX_NAME_SIZE], inputFile[MAX_NAME_SIZE], outputFile[MAX_NAME_SIZE];
+	//Initialize some stuff!
+	system("clear");
 
+	char sourceName[MAX_NAME_SIZE], inputFile[MAX_NAME_SIZE], outputFile[MAX_NAME_SIZE];
 	char command[MAX_NAME_SIZE * 3];
 
+	//Get user input
 	printf("Enter the name of the source file:");
 	scanf("%s", sourceName);
 
@@ -19,23 +20,34 @@ int main(int argc, char *argv[])
 	printf("Enter the output file name:");
 	scanf("%s", outputFile);
 
+	//Build the first command to compile the program
+	command[0] = '\0';
 	strcpy(command, "gcc -o myProj ");
 	strcat(command, sourceName);
 
-	int exitStatus = system(command);
+	#ifdef debug
+	printf("Command 1: %s\n", command);
+	#endif
 
-	command[0] = '\0';//Clears the string
+	system(command);
 
+	//Build the second command to actually use the student's program
+	command[0] = '\0';
 	strcpy(command, "./myProj ");
 	strcat(command, inputFile);
 	strcat(command, " > ");
 	strcat(command, outputFile);
 
-	printf("%s", command);
+	#ifdef debug
+	printf("Command 2: %s\n", command);
+	#endif
 
 	system(command);
 
-	printf("\n");
+	//Compare output file with expected results
+
+	testFile(outputFile);
+
 	return 0;
 
 }
