@@ -1,5 +1,4 @@
 #include "hw3func.h"
-#define debug
 
 int main()
 {
