@@ -1,5 +1,18 @@
 #include "hw3func.h"
 
+/*
+
+CSE230 - Homework 3
+
+Kuba Gasiorowski, kgasiorowski, kuba.gasiorowski@stonybrook.edu
+
+Contains all function implementations
+for this program.
+
+*/
+
+//Test a user file with "results.txt". The
+//number of differences is returned.
 int testFile(char outputFileName[])
 {
 
@@ -54,5 +67,20 @@ int testFile(char outputFileName[])
 	fclose(expectedResultsFile);
 
 	return differenceCount;
+
+}
+
+//Gets user input
+void getInput(char sourceName[MAX_NAME_SIZE], char inputFile[MAX_NAME_SIZE], char outputFile[MAX_NAME_SIZE])
+{
+
+	printf("Enter the name of the source file:");
+        scanf("%s", sourceName);
+
+        printf("Enter the input file name:");
+        scanf("%s", inputFile);
+
+        printf("Enter the output file name:");
+        scanf("%s", outputFile);
 
 }

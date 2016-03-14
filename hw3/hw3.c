@@ -1,5 +1,23 @@
 #include "hw3func.h"
 
+/*
+
+CSE230 - Homework 3
+
+Kuba Gasiorowski, kgasiorowski, kuba.gasiorowski@stonybrook.edu
+
+Main driver program behind this assignment.
+Asks for a source file, an input text file,
+and output text file. Compiles the source, and
+attemps to run it with the input text file,
+while writing it to the output file. Then assigns
+it a grade based on compilability, runability, and
+output correctness. 
+
+*/
+
+#include "hw3func.h"
+
 int main()
 {
 
@@ -11,14 +29,7 @@ int main()
 	int grade = 100;
 
 	//Get user input
-	printf("Enter the name of the source file:");
-	scanf("%s", sourceName);
-
-	printf("Enter the input file name:");
-	scanf("%s", inputFile);
-
-	printf("Enter the output file name:");
-	scanf("%s", outputFile);
+	getInput(sourceName,  inputFile,  outputFile);
 
 	//Build the first command to compile the program
 	command[0] = '\0';
