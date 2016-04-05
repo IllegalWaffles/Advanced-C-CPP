@@ -14,6 +14,6 @@ typedef struct Student{
 //See each implementation for detailed comments.
 int getNumStudents(FILE*);
 void printStudents(Student[], int, FILE*);
-void printStudentHeader();
+void printStudentHeader(FILE*);
 int compare(const void *, const void *);
 void sortStudents(Student[], int);

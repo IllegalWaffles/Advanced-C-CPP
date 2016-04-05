@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "hw2functions.h"
+#include "hw2functionsextra.h"
 
 /*
  *	Kuba Gasiorowski, kgasiorowski, 109776237, kuba.gasiorowski@stonybrook.edu
@@ -55,10 +55,10 @@ void printStudents(Student students[], int numStudents, FILE *output)
 }
 
 //Prints the header for output
-void printStudentHeader(){
+void printStudentHeader(FILE *output){
 	
-	printf("\nLast Name, First Name            Term      ID      Course   Section");
-	printf("\n-------------------------------- ----  ---------   ------   -------\n");
+	fprintf(output, "\nLast Name, First Name            Term      ID      Course   Section");
+	fprintf(output, "\n-------------------------------- ----  ---------   ------   -------\n");
 	
 }
 

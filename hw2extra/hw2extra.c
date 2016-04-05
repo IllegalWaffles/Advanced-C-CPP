@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "hw2functions.h"
+#include "hw2functionsextra.h"
 
 /*
  *	Kuba Gasiorowski, kgasiorowski, 109776237, kuba.gasiorowski@stonybrook.edu
@@ -15,29 +15,73 @@
  *  
  */
 
-int main(){
+int main(int argc, char *argv[]){
 	
-	char inputFileName[100], c;
-	FILE* inputFile;
+	char inputFileName[100], outputFileName[100], c;
+	FILE *inputFile, *outputFile;
 	int i, numStudents = 1, errorFlag = 0;
 	
-	//Try to open a file.
-	//If it doesn't work, keep trying or q to quit.
-	do{
+	if(argc == 1)
+	{
 	
-		printf("Enter a file to read information from (or q to exit):");
-		scanf("%s", inputFileName);
+		//Try to open a file from stdin.
+		//If it doesn't work, keep trying or q to quit.
+		do{
+		
+			printf("Enter a file to read information from (or q to exit):");
+			scanf("%s", inputFileName);
+		
+			if(strcmp(inputFileName, "q") == 0){
+			
+				printf("Terminating program...");
+				return 0;
+			
+			}
+			else if((inputFile = fopen(inputFileName, "r")) == NULL)
+				printf("Error: file not found\n");
 	
-		if(strcmp(inputFileName, "q") == 0){
+		}while(inputFile == NULL);
+	
+		outputFile = stdout;
+	
+	}
+	else if(argc == 2)
+	{
 		
-			printf("Terminating program...");
-			return 0;
-		
+		//Only the input file was given
+		strcpy(inputFileName, argv[1]);
+		if((inputFile = fopen(inputFileName, "r")) == NULL)
+		{
+			
+			printf("ERROR: Invalid file name");
+			return 1;
+			
 		}
-		else if((inputFile = fopen(inputFileName, "r")) == NULL)
-			printf("Error: file not found\n");
-	
-	}while(inputFile == NULL);
+		
+	}
+	else if(argc == 3)
+	{
+		
+		//Both input and output files were given
+		strcpy(inputFileName, argv[1]);
+		if((inputFile = fopen(inputFileName, "r")) == NULL)
+		{
+			
+			printf("ERROR: Invalid input file name");
+			return 1;
+			
+		}
+		
+		strcpy(outputFileName, argv[2]);
+		if((outputFile = fopen(outputFileName, "w")) == NULL)
+		{
+			
+			printf("ERROR: Invalid output file name");
+			return 1;
+			
+		}
+		
+	}
 	
 	//Find how many students are here
 	numStudents = getNumStudents(inputFile);
@@ -87,13 +131,13 @@ int main(){
 	fclose(inputFile);
 	
 	//Print the output header
-	printStudentHeader();
+	printStudentHeader(stdout);
 	
 	//Sort the students
 	sortStudents(students, numStudents);
 	
 	//Print the students
-	printStudents(students, numStudents);
+	printStudents(students, numStudents, stdout);
 	
 	return 0;
 	
