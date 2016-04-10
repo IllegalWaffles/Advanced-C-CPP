@@ -41,7 +41,7 @@ int main()
 	{
 
 		grade -= 100;
-		printf("The students program could not be compiled. Grade: %d", grade);
+		printf("The students program could not be compiled. Grade: %d\n", grade);
 		return 0;
 
 	}
@@ -58,7 +58,7 @@ int main()
 	{
 
 		grade -= 100;
-		printf("There was a problem running the program. Grade: %d", grade);
+		printf("There was a problem running the program. Grade: %d\n", grade);
 		return 0;
 
 	}
