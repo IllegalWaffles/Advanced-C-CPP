@@ -1,5 +1,3 @@
-#include "hw3func.h"
-
 /*
 
 CSE230 - Homework 3
@@ -10,6 +8,8 @@ Contains all function implementations
 for this program.
 
 */
+
+#include "hw3func.h"
 
 //Test a user file with "results.txt". The
 //number of differences is returned.
@@ -32,6 +32,7 @@ int testFile(char outputFileName[])
 
 	}
 
+	//Searches for results.txt which containts the expected program output
 	if((expectedResultsFile = fopen("results.txt", "r")) == NULL)
 	{
 

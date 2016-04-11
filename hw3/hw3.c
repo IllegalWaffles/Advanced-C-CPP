@@ -1,5 +1,3 @@
-#include "hw3func.h"
-
 /*
 
 CSE230 - Homework 3
@@ -12,7 +10,7 @@ and output text file. Compiles the source, and
 attemps to run it with the input text file,
 while writing it to the output file. Then assigns
 it a grade based on compilability, runability, and
-output correctness. 
+output correctness.
 
 */
 
@@ -40,6 +38,7 @@ int main()
 	if(system(command) != 0)
 	{
 
+		//Uncompilable code. Zero.
 		grade -= 100;
 		printf("The students program could not be compiled. Grade: %d", grade);
 		return 0;
@@ -57,6 +56,7 @@ int main()
 	if(system(command) != 0)
 	{
 
+		//Program won't run. Gets a zero.
 		grade -= 100;
 		printf("There was a problem running the program. Grade: %d", grade);
 		return 0;
@@ -69,8 +69,10 @@ int main()
 
 	if(numMistakes == 0)
 		printf("Output is correct. Grade: %d\n", grade);
-	else if(numMistakes == -1){
+	else if(numMistakes == -1)
+	{
 
+		//One of the files couldn't be opened. Zero.
 		grade -= 100;
 		printf("There was an error reading one of the files. Grade: %d", grade);
 
@@ -78,6 +80,7 @@ int main()
 	else
 	{
 
+		//Minus 5 points per mistake
 		grade -= numMistakes * 5;
 		printf("Output was incorrect. There were %d mistakes.\nGrade: %d\n", numMistakes, grade);
 
