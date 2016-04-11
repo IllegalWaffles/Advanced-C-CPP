@@ -27,7 +27,7 @@ int testFile(char outputFileName[])
 	if((outputFile = fopen(outputFileName, "r")) == NULL)
 	{
 
-		printf("Program output cannot be opened.");
+		printf("Program output cannot be opened.\n");
 		return -1;
 
 	}
@@ -36,7 +36,7 @@ int testFile(char outputFileName[])
 	if((expectedResultsFile = fopen("results.txt", "r")) == NULL)
 	{
 
-		printf("Expected result file cannot be opened.");
+		printf("Expected result file cannot be opened.\n");
 		return -1;
 
 	}
