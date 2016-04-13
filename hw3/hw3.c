@@ -22,12 +22,12 @@ int main()
 	//Initialize some stuff!
 	system("clear");
 
-	char sourceName[MAX_NAME_SIZE], inputFile[MAX_NAME_SIZE], outputFile[MAX_NAME_SIZE];
+	char sourceName[MAX_NAME_SIZE], inputFile[MAX_NAME_SIZE], expectedResultsFile[MAX_NAME_SIZE];
 	char command[MAX_NAME_SIZE * 3];
 	int grade = 100;
 
 	//Get user input
-	getInput(sourceName,  inputFile,  outputFile);
+	getInput(sourceName,  inputFile,  expectedResultsFile);
 
 	//Build the first command to compile the program
 	command[0] = '\0';
@@ -49,8 +49,7 @@ int main()
 	command[0] = '\0';
 	strcpy(command, "./myProj ");
 	strcat(command, inputFile);
-	strcat(command, " > ");
-	strcat(command, outputFile);
+	strcat(command, " > output.txt");
 
 	//Attempt to run the student's program with test input
 	if(system(command) != 0)
@@ -65,7 +64,7 @@ int main()
 
 	//Compare output file with expected results
 
-	int numMistakes = testFile(outputFile);
+	int numMistakes = testFile(expectedResultsFile);
 
 	if(numMistakes == 0)
 		printf("Output is correct. Grade: %d\n", grade);

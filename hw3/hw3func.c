@@ -13,7 +13,7 @@ for this program.
 
 //Test a user file with "results.txt". The
 //number of differences is returned.
-int testFile(char outputFileName[])
+int testFile(char expectedResultFileName[])
 {
 
 	#ifdef debug
@@ -24,7 +24,7 @@ int testFile(char outputFileName[])
 
 	FILE *outputFile, *expectedResultsFile;
 
-	if((outputFile = fopen(outputFileName, "r")) == NULL)
+	if((outputFile = fopen("output.txt", "r")) == NULL)
 	{
 
 		printf("Program output cannot be opened.\n");
@@ -33,7 +33,7 @@ int testFile(char outputFileName[])
 	}
 
 	//Searches for results.txt which containts the expected program output
-	if((expectedResultsFile = fopen("results.txt", "r")) == NULL)
+	if((expectedResultsFile = fopen(expectedResultFileName, "r")) == NULL)
 	{
 
 		printf("Expected result file cannot be opened.\n");
@@ -81,7 +81,7 @@ void getInput(char sourceName[MAX_NAME_SIZE], char inputFile[MAX_NAME_SIZE], cha
         printf("Enter the input file name:");
         scanf("%s", inputFile);
 
-        printf("Enter the output file name:");
+        printf("Enter the expected results file name:");
         scanf("%s", outputFile);
 
 }
