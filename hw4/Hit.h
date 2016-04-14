@@ -2,43 +2,34 @@
 #define HIT
 
 #include "Date.h"
-#include "Debug.h"
 using namespace std;
 
 class Hit{
 		
 	public:
 		//Regular methods
-		void print() const
-		{
-		
-			cout << "Address: " << getAddress() << " Date of access: ";
-			getDate().print();
-		
-		}
+		void print() const;
 		
 		//Constructors
-		Hit(){}
+		Hit();
 		
-		Hit(Date dateOfAccess, string address)
-		{
-		
-			setDate(dateOfAccess);
-			setAddress(address);
-		
-		}
+		Hit(Date, string, string);
 		
 		//Setters
-		void setDate(Date d){dateOfAccess = d;}
-		void setAddress(string s){address = s;}
+		void setDate(Date);
+		void setAddress(string);
+		void setHost(string);
 		
 		//Getters
-		Date getDate() const {return dateOfAccess;}
-		string getAddress() const {return address;}
+		Date getDate() const;
+		string getAddress() const;
+		string getHost() const;
 		
 	private:
 		string address;
+		string host;
 		Date dateOfAccess;
+		
 
 };
 #endif
