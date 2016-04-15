@@ -21,7 +21,7 @@ Date Date::parseDateFromString(string input)
 {
 
 	if(input.length() != 10)
-		throw "Bad date format";
+		throw "Bad date format, not mm/dd/yyyy";
 
 	int day, month, year;
 	

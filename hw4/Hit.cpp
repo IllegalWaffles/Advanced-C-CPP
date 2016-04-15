@@ -13,12 +13,13 @@ void Hit::print() const
 //Constructors
 Hit::Hit(){}
 
-Hit::Hit(Date dateOfAccess, string address, string host)
+Hit::Hit(Date dateOfAccess, string address, string host, bool isUnique)
 {
 
 	setDate(dateOfAccess);
 	setAddress(address);
 	setHost(host);
+	setIsUnique(isUnique);
 
 }
 
@@ -26,9 +27,10 @@ Hit::Hit(Date dateOfAccess, string address, string host)
 void Hit::setDate(Date d){dateOfAccess = d;}
 void Hit::setAddress(string s){address = s;}
 void Hit::setHost(string s){host = s;}
-
+void Hit::setIsUnique(bool b){unique = b;}
 
 //Getters
 Date Hit::getDate() const {return dateOfAccess;}
 string Hit::getAddress() const {return address;}
 string Hit::getHost() const {return host;}
+bool Hit::isUnique() const {return unique;}

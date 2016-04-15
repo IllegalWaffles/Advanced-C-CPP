@@ -12,8 +12,6 @@ class Date{
 
 	public:
 		
-		
-		
 		//Standard constructor
 		Date(int, int, int);
 		

@@ -1,9 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include "Hit.h"
+#include "Host.h"
 #include <stdexcept>
 
-#define MAX_HIT_ARRAY_VALUE 100
+
+#define MAX_HOST_ARRAY_VALUE 100
 
 using namespace std;
 
@@ -26,27 +27,68 @@ int main()
 	bool finished = false;
 	string cmd, inputFileName;
 	
-	
 	//Get the input file name
 	cout << "Enter an input file:";
-	cin >> inputFileName;
+	//cin >> inputFileName;
+	inputFileName = "input.txt";
 	
 	//Code to read in and parse the file
 	ifstream in;
 	in.open(inputFileName.c_str());
 	
-	string address, host, tempDateString;
-	Hit hitList[MAX_HIT_ARRAY_VALUE];
-	unsigned int numHits = 0, lineNum = 0;
+	string address, hostname, tempDateString;
+	Host hosts[MAX_HOST_ARRAY_VALUE];
+	unsigned int numHosts = 0, lineNum = 0;
 	
-	while(in >> address >> host >> tempDateString)
+	cout << "Loading " << inputFileName << "..." << endl;
+	while(in >> address >> hostname >> tempDateString)
 	{
+		
+		//Line number is always incremented
+		lineNum++;
+		
+		if(address.at(0) == '/' && address.at(1) == '/')
+		{
+			
+			cout << "Line " << lineNum << " commented, skipping" << endl;
+			continue;
+		
+		}
 		
 		try{
 			
-			lineNum++;
-			Hit h = Hit(Date::parseDateFromString(tempDateString), address, host);
-			hitList[numHits++] = h;
+			//Make the hit
+			//We don't know if it's unique or not, that is determined later on,
+			//So it doesn't matter what we pass in for now.
+			Hit newHit(Date::parseDateFromString(tempDateString), address, hostname, false);
+			bool matchFound = false;
+			
+			//Logic to figure out which host this hit belongs to
+			for(int i = 0; i < numHosts && !matchFound; i++)
+			{
+			
+				cout << "Comparing " << hosts[i].getName() << " and " << hostname << endl;
+			
+				 if(hosts[i].getName().compare(hostname) == 0)
+				 {
+				 
+				 	matchFound = true;
+				 	hosts[i].addHit(newHit);
+				 
+				 }
+			
+			}
+		
+			if(!matchFound)
+			{
+			
+				hosts[numHosts] = Host(hostname);
+				hosts[numHosts].addHit(newHit);
+				numHosts++;
+				cout << "New host added. Total number of hosts: " << numHosts << endl;
+				
+			}
+		
 		
 		}catch(const char* msg){
 			
@@ -55,11 +97,14 @@ int main()
 			
 		}
 		
+		
+		
 	}
 	
 	in.close();
 	
 	//Prints the menu and waits for input
+	cout << endl;
 	printMenu();
 	
 	while(!finished)
@@ -84,46 +129,76 @@ int main()
 			
 			//Prints all link information between two dates, 
 			//and for a specific host
-			string tempFirstDate, tempSecondDate, hostName;
+			string tempStartDate, tempEndDate, hostname;
+			int numReturnHits, numUniqueHits;
 			
+			//Get our input
 			cout << "Enter a link name:";
-			cin >> hostName;
+			cin >> hostname;
 			cout << "Enter the beginning date [mm/dd/yyyy]:";
-			cin >> tempFirstDate;
+			cin >> tempStartDate;
 			cout << "Enter the ending date [mm/dd/yyyy]:";
-			cin >> tempSecondDate;
+			cin >> tempEndDate;
 		
+			//Parse our input
 			try{
 			
-				Date firstDate = Date::parseDateFromString(tempFirstDate);
-				Date secondDate = Date::parseDateFromString(tempSecondDate);
+				Date startDate = Date::parseDateFromString(tempStartDate);
+				Date endDate = Date::parseDateFromString(tempEndDate);
 			
-				for(int i = 0; i < numHits; i++)
+				if(startDate.compare(endDate) > 0)
+					throw "Wrong date order";
+				
+				for(int i = 0; i < numHosts; i++)
 				{
 					
-					//Logic to parse through the list of hits here
-					if(hostName.compare(hitList[i].getHost()) == 0){
+					//Logic to parse through the list of hosts here
+					if(hostname.compare(hosts[i].getName()) == 0)
+					{
 					
-						hitList[i].print();
-						cout << endl;
+						numUniqueHits = hosts[i].getUniqueHitsBetween(startDate, endDate);
+						numReturnHits = hosts[i].getReturnHitsBetween(startDate, endDate);
+						break;
 					
 					}
 					
 				}
 			
+				//Lets avoid annoying pointer operations here
+				char temp[] = "%-10s%5d\n";
+				char *fmtStr = temp;
+			
+				//Print the stuff
+				cout << "Link: " << hostname << endl;
+				printf(fmtStr, "Total hits", numUniqueHits + numReturnHits);
+				printf(fmtStr, "Unique:", numUniqueHits);
+				printf(fmtStr, "Returning:", numReturnHits);
+			
+			
 			}catch(const char* msg){
 			
+				//There was an error
 				cerr << "Invalid date entered: " << msg << endl;
 			
 			}
-		
-			
 		
 		}
 		else if(cmd.compare("2") == 0)
 		{
 			
 			//Prints information about all link hits
+			
+			//Print our header
+			cout << "     Link Name		Unique Visits	Return Visits	Total Visits" << endl;
+			cout << "--------------------	-------------	-------------	------------" << endl;
+			
+			//Make the format string
+			char temp[] = "%-24s%7d%16d%16d\n";
+			const char *fmt = temp;
+			
+			//Print each object
+			for(int i = 0; i < numHosts; i++)
+				printf(fmt, hosts[i].getName().c_str(), hosts[i].getUniqueHits(), hosts[i].getReturnHits(), hosts[i].getTotalHits());
 			
 			
 		}
@@ -134,6 +209,8 @@ int main()
 			printMenu();
 			
 		}
+		else
+			cout << "Invalid command" << endl;
 		
 	}//Terminate input loop
 	
