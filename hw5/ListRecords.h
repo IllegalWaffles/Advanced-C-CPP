@@ -5,6 +5,7 @@
 #include "BookRecord.h"
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include <cstring>
 #include <cstdlib>
 class ListRecords{

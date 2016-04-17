@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include "ListRecords.h"
-
+#include <algorithm>
 void printMenu()
 {
 
@@ -16,7 +16,7 @@ void printMenu()
 }
 
 int main()
-{
+{	
 	
 	string inputFileName;
 

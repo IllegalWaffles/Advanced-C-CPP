@@ -36,3 +36,19 @@ void BookRecord::print()
 
 
 }
+
+//Comparers
+
+int BookRecord::compareByISBN(BookRecord other)
+{
+
+	return getISBN() - other.getISBN();
+
+}
+
+int BookRecord::compareByTitle(BookRecord other)
+{
+
+	return getTitle().compare(other.getTitle());
+
+}

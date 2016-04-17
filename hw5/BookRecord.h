@@ -27,6 +27,10 @@ class BookRecord{
 		//Regular methods
 		void print();
 		
+		//Comparers
+		int compareByISBN(BookRecord);
+		int compareByTitle(BookRecord);
+		
 	private:
 		string title, publisher, author;
 		int ISBN;
