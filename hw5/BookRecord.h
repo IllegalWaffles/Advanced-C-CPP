@@ -19,17 +19,17 @@ class BookRecord{
 		void setISBN(int);
 		
 		//Accessors
-		string getTitle();
-		string getAuthor();
-		string getPublisher();
-		int getISBN();
+		string getTitle() const;
+		string getAuthor() const;
+		string getPublisher() const;
+		int getISBN() const;
 		
 		//Regular methods
-		void print();
+		void print() const;
 		
 		//Comparers
-		int compareByISBN(BookRecord);
-		int compareByTitle(BookRecord);
+		int compareByISBN(BookRecord) const;
+		int compareByTitle(BookRecord) const;
 		
 	private:
 		string title, publisher, author;

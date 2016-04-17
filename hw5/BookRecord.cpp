@@ -20,13 +20,13 @@ void BookRecord::setAuthor(string s){author = s;}
 void BookRecord::setISBN(int i){ISBN = i;}
 
 //Accessors
-string BookRecord::getTitle(){return title;}
-string BookRecord::getAuthor(){return author;}
-string BookRecord::getPublisher(){return publisher;}
-int BookRecord::getISBN(){return ISBN;}
+string BookRecord::getTitle()const{return title;}
+string BookRecord::getAuthor()const{return author;}
+string BookRecord::getPublisher()const{return publisher;}
+int BookRecord::getISBN()const{return ISBN;}
 
 //Regular method
-void BookRecord::print()
+void BookRecord::print()const
 {
 
 	cout << "Title: " << getTitle() << endl;
@@ -34,19 +34,18 @@ void BookRecord::print()
 	cout << "Publisher: " << getPublisher() << endl;
 	cout << "ISBN: " << getISBN() << endl;
 
-
 }
 
 //Comparers
 
-int BookRecord::compareByISBN(BookRecord other)
+int BookRecord::compareByISBN(BookRecord other)const
 {
 
 	return getISBN() - other.getISBN();
 
 }
 
-int BookRecord::compareByTitle(BookRecord other)
+int BookRecord::compareByTitle(BookRecord other)const
 {
 
 	return getTitle().compare(other.getTitle());
