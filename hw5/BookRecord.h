@@ -1,9 +1,17 @@
+/*
+
+	Kuba Gasiorowski, NETID: kgasiorowski, kuba.gasiorowski@stonybrook.edu
+
+	Essentially a book. Has a publisher, author, title, and an ISBN number.
+
+*/
+
 #ifndef BOOKRECORD
 #define BOOKRECORD
 
 #include <string>
 #include <iostream>
-
+#include <iomanip>
 using namespace std;
 class BookRecord{
 
@@ -25,13 +33,14 @@ class BookRecord{
 		int getISBN() const;
 		
 		//Regular methods
-		void print() const;
+		virtual void print() const;
 		
 		//Comparers
 		int compareByISBN(BookRecord) const;
 		int compareByTitle(BookRecord) const;
 		
-	private:
+	//In preparation for inheritance
+	protected:
 		string title, publisher, author;
 		int ISBN;
 

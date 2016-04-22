@@ -1,3 +1,11 @@
+/*
+
+	Kuba Gasiorowski, NETID: kgasiorowski, kuba.gasiorowski@stonybrook.edu
+
+	This class represents a list of books.
+
+*/
+
 #include "ListRecords.h"
 
 using namespace std;
@@ -7,13 +15,16 @@ using namespace std;
 ListRecords::ListRecords(string filename)
 {
 	
-	string author, title, publisher, tempISBN;
+	string author, title, publisher, tempISBN, emptyLine;
 	int ISBN;
 	numBooks = 0;
 	ifstream inputfile(filename.c_str());
 	char temp[11];
 	
 	if(inputfile.is_open())
+	{
+	
+		cout << "WARNING - values of length > 40 will be cut down to 40 characters" << endl;
 	
 		while(getline(inputfile, title))
 		{
@@ -35,11 +46,11 @@ ListRecords::ListRecords(string filename)
 			
 			records[numBooks++] = BookRecord(title, author, publisher, ISBN);
 			
-			getline(inputfile, title);
+			getline(inputfile, emptyLine);
 			
 		}
 	
-	else throw "Could not open file";
+	}else throw "Could not open file";
 	
 }
 
@@ -100,12 +111,12 @@ void ListRecords::printListByTitle()
 void ListRecords::printBooks()
 {
 	
-	printHeader();
+	printheader();
 	for(int i = 0; i < numBooks; i++){
 	
-		cout.setf(ios::left, ios::adjustfield);
-		cout << setw(22) << records[i].getTitle() << records[i].getAuthor() << endl;
-
+		records[i].print();
+		cout << endl;
+		
 	}
 
 }
@@ -148,10 +159,11 @@ void ListRecords::sortByTitle()
 	
 }
 
-void ListRecords::printHeader()
+void ListRecords::printheader()
 {
 	
-	cout << "        Title                 Author               publisher           ISBN" << endl;
-	cout << "---------------------- ---------------------- ---------------------- ----------" << endl;
+	//The "extra information" section allows some wiggle room for the inheritance portion of the assignment
+	cout << "        Title                 Author               publisher           ISBN              Extra Information" << endl;
+	cout << "---------------------- ---------------------- ---------------------- ---------- -----------------------------------" << endl;
 	
 }

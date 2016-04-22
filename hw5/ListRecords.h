@@ -1,10 +1,17 @@
+/*
+
+	Kuba Gasiorowski, NETID: kgasiorowski, kuba.gasiorowski@stonybrook.edu
+
+	This class represents a list of books.
+
+*/
+
 #ifndef LISTRECORDS
 #define LISTRECORDS
 
 #define TABLE_SIZE 200
 #include "BookRecord.h"
-#include <iostream>
-#include <iomanip>
+#include "TypeBookRecord.h"
 #include <fstream>
 #include <algorithm>
 #include <cstring>
@@ -30,7 +37,7 @@ class ListRecords{
 		void sortByISBN();
 		void sortByTitle();
 		void printBooks();
-		void printHeader();
+		void printheader();
 
 };
 #endif
