@@ -4,8 +4,6 @@
 #include <string>
 #include "BookRecord.h"
 
-using namespace std;
-
 class TypeBookRecord:public BookRecord{
 
 	public:

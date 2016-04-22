@@ -17,17 +17,9 @@ TypeBookRecord::TypeBookRecord(string title, string author, string publisher, in
 
 }
 
-void TypeBookRecord::setType(string s){
+void TypeBookRecord::setType(string s){type = s;}
 
-	type = s;
-
-}
-
-string TypeBookRecord::getType(){
-
-	return type;
-
-}
+string TypeBookRecord::getType(){return type;}
 
 void TypeBookRecord::print() const{
 
