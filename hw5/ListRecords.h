@@ -12,6 +12,7 @@
 #define TABLE_SIZE 200
 #include "BookRecord.h"
 #include "TypeBookRecord.h"
+#include "InfoBookRecord.h"
 #include <fstream>
 #include <algorithm>
 #include <cstring>

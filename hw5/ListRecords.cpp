@@ -15,7 +15,8 @@ using namespace std;
 ListRecords::ListRecords(string filename)
 {
 	
-	string author, title, publisher, tempISBN, emptyLine;
+	string author, title, publisher, tempISBN, emptyLine, USER_INPUT;
+	bool exitFlag = true;
 	int ISBN;
 	numBooks = 0;
 	ifstream inputfile(filename.c_str());
@@ -28,6 +29,8 @@ ListRecords::ListRecords(string filename)
 	
 		while(getline(inputfile, title))
 		{
+			
+			exitFlag = true;
 			
 			getline(inputfile, author);
 			getline(inputfile, publisher);
@@ -44,7 +47,43 @@ ListRecords::ListRecords(string filename)
 			
 			}
 			
-			records[numBooks++] = BookRecord(title, author, publisher, ISBN);
+			//Adds the book to the list
+			do{
+			
+				cout << "For title: " << title << endl;
+				cout << "Type or Info? [t/i]:";
+				cin >> USER_INPUT;
+			
+				if(USER_INPUT.compare("t") == 0)
+				{
+				
+					string tempInput;
+					cout << "Enter type:";
+					cin >> tempInput;
+				
+					BookRecord* test = &records[numBooks+1];
+					
+					test = new TypeBookRecord(title, author, publisher, ISBN, tempInput);
+					exitFlag = false;
+				
+				}
+				else if(USER_INPUT.compare("i") == 0)
+				{
+					
+					/*char biography[100];
+					double price;
+					
+					cout << "Enter biography:";
+					cin.getline(biography, sizeof(biography));
+					cout << "Enter price:";
+					cin >> price;
+					
+					records[numBooks++] = InfoBookRecord(title, author, publisher, ISBN, string(biography), price);
+					exitFlag = false;*/
+				
+				}
+			
+			}while(exitFlag);
 			
 			getline(inputfile, emptyLine);
 			
