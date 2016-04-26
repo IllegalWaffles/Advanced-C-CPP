@@ -1,3 +1,10 @@
+/*
+
+	Kuba Gasiorowski, NETID: kgasiorowski, kuba.gasiorowski@stonybrook.edu
+	
+
+*/
+
 #ifndef TYPEBOOKRECORD
 #define TYPEBOOKRECORD
 

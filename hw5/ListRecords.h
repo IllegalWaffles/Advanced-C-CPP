@@ -32,7 +32,7 @@ class ListRecords{
 		bool containsISBN(int);
 			
 	private:
-		BookRecord records[TABLE_SIZE];
+		BookRecord *records[TABLE_SIZE];
 		unsigned int numBooks;
 
 		void sortByISBN();

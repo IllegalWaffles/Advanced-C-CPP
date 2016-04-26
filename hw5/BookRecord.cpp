@@ -67,6 +67,7 @@ void BookRecord::print()const
 	//Prints the ISBN number
 	cout.setf(ios::right, ios::adjustfield);
 	cout << setw(10) << setfill('0') << getISBN();
+	cout << setfill(' ') << " ";
 
 }
 

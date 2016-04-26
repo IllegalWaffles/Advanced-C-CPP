@@ -1,3 +1,10 @@
+/*
+
+	Kuba Gasiorowski, NETID: kgasiorowski, kuba.gasiorowski@stonybrook.edu
+	
+
+*/
+
 #include "InfoBookRecord.h"
 
 InfoBookRecord::InfoBookRecord()
@@ -35,6 +42,6 @@ void InfoBookRecord::print() const
 	else
 		tempBio = biography;
 	
-	cout << tempBio << " $" << price;
+	cout << "Bio: " << tempBio << " $" << price;
 
 }

@@ -1,3 +1,10 @@
+/*
+
+	Kuba Gasiorowski, NETID: kgasiorowski, kuba.gasiorowski@stonybrook.edu
+	
+
+*/
+
 #include "TypeBookRecord.h"
 TypeBookRecord::TypeBookRecord()
 {
@@ -32,6 +39,6 @@ void TypeBookRecord::print() const{
 		tempType = type;
 
 	cout.setf(ios::left, ios::adjustfield);
-	cout << " " << setw(15) << tempType;
+	cout << "Type: " << setw(15) << tempType;
 
 }

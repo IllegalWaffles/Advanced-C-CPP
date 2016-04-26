@@ -15,8 +15,7 @@ using namespace std;
 ListRecords::ListRecords(string filename)
 {
 	
-	string author, title, publisher, tempISBN, emptyLine, USER_INPUT;
-	bool exitFlag = true;
+	string author, title, publisher, tempISBN, emptyLine;
 	int ISBN;
 	numBooks = 0;
 	ifstream inputfile(filename.c_str());
@@ -29,8 +28,6 @@ ListRecords::ListRecords(string filename)
 	
 		while(getline(inputfile, title))
 		{
-			
-			exitFlag = true;
 			
 			getline(inputfile, author);
 			getline(inputfile, publisher);
@@ -48,42 +45,7 @@ ListRecords::ListRecords(string filename)
 			}
 			
 			//Adds the book to the list
-			do{
-			
-				cout << "For title: " << title << endl;
-				cout << "Type or Info? [t/i]:";
-				cin >> USER_INPUT;
-			
-				if(USER_INPUT.compare("t") == 0)
-				{
-				
-					string tempInput;
-					cout << "Enter type:";
-					cin >> tempInput;
-				
-					BookRecord* test = &records[numBooks+1];
-					
-					test = new TypeBookRecord(title, author, publisher, ISBN, tempInput);
-					exitFlag = false;
-				
-				}
-				else if(USER_INPUT.compare("i") == 0)
-				{
-					
-					/*char biography[100];
-					double price;
-					
-					cout << "Enter biography:";
-					cin.getline(biography, sizeof(biography));
-					cout << "Enter price:";
-					cin >> price;
-					
-					records[numBooks++] = InfoBookRecord(title, author, publisher, ISBN, string(biography), price);
-					exitFlag = false;*/
-				
-				}
-			
-			}while(exitFlag);
+			insertBookInfo(BookRecord(title, author, publisher, ISBN));
 			
 			getline(inputfile, emptyLine);
 			
@@ -99,7 +61,7 @@ bool ListRecords::containsISBN(int isbnNumber)
 {
 
 	for(int i = 0; i < numBooks; i++)
-		if(isbnNumber == records[i].getISBN())
+		if(isbnNumber == records[i]->getISBN())
 			return true;
 	
 	return false;
@@ -112,9 +74,53 @@ void ListRecords::insertBookInfo(BookRecord b)
 {
 	
 	if(containsISBN(b.getISBN()))
-		throw "This record list already has a book under this ISBN";
+	{
+	
+		cerr << "Error: records already contain this ISBN, aborting this book" << endl;
+		return;
+	
+	}
 	else 
-		records[numBooks++] = b;
+	{
+	
+		bool exitFlag = true;
+		string USER_INPUT;
+	
+		do{
+			
+			cout << endl << "Type or Info? [t/i]:";
+			cin >> USER_INPUT;
+		
+			if(USER_INPUT.compare("t") == 0)
+			{
+			
+				string tempInput;
+				cout << "Enter type:";
+				cin >> tempInput;
+				
+				records[numBooks++] = new TypeBookRecord(b.getTitle(), b.getAuthor(), b.getPublisher(), b.getISBN(), tempInput);
+				exitFlag = false;
+			
+			}
+			else if(USER_INPUT.compare("i") == 0)
+			{
+				
+				string biography;
+				double price;
+				
+				cout << "Enter biography:";
+				cin >> biography;
+				cout << "Enter price:";
+				cin >> price;
+				
+				records[numBooks++] = new InfoBookRecord(b.getTitle(), b.getAuthor(), b.getPublisher(), b.getISBN(), biography, price);
+				exitFlag = false;
+			
+			}
+		
+		}while(exitFlag);
+	
+	}
 	
 }
 
@@ -123,8 +129,10 @@ void ListRecords::printBookInfo(int ISBN)
 {
 	
 	for(int i = 0; i < numBooks; i++)
-		if(ISBN == records[i].getISBN())
-			records[i].print();
+		if(ISBN == records[i]->getISBN())
+			records[i]->print();
+			
+	cout << endl;
 			
 }
 
@@ -153,7 +161,7 @@ void ListRecords::printBooks()
 	printheader();
 	for(int i = 0; i < numBooks; i++){
 	
-		records[i].print();
+		records[i]->print();
 		cout << endl;
 		
 	}
@@ -170,7 +178,7 @@ void ListRecords::sortByISBN()
 	{
 		
 		for(int i = 0; i < numBooks-numSorted-1; i++)
-			if(records[i].getISBN() > records[i+1].getISBN())
+			if(records[i]->getISBN() > records[i+1]->getISBN())
 				swap(records[i], records[i+1]);
 		
 		numSorted++;
@@ -189,7 +197,7 @@ void ListRecords::sortByTitle()
 	{
 		
 		for(int i = 0; i < numBooks-numSorted-1; i++)
-			if(records[i].getTitle().compare(records[i+1].getTitle()) > 0)
+			if(records[i]->getTitle().compare(records[i+1]->getTitle()) > 0)
 				swap(records[i], records[i+1]);
 			
 			numSorted++;
