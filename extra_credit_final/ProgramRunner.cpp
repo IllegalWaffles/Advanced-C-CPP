@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -15,18 +16,22 @@ int main()
 	if(pid == 0)
 	{
 
-		theString = "Child";
+		for(int j = 0; j < 10; j++)
+			cout << "Child: " << j << endl;
 
 	}
 	else
 	{
 
-		theString = "Parent";
-		wait();
+		wait(&pid);
+		for(int i = 0; i < 10; ++i)
+		{
+
+			cout << "Parent: " << i << endl;;
+
+		}
 
 	}
-
-	cout << theString;
 
 	return 0;
 
