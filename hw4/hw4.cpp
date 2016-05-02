@@ -11,7 +11,7 @@ using namespace std;
 //Helper method to print the menu
 void printMenu()
 {
-	
+
 	cout << "Please select a menu option:" << endl;
 	cout << "1)Link Information in date range" << endl;
 	cout << "2)Information about all links" << endl;
@@ -29,8 +29,7 @@ int main()
 	
 	//Get the input file name
 	cout << "Enter an input file:";
-	//cin >> inputFileName;
-	inputFileName = "input.txt";
+	cin >> inputFileName;
 	
 	//Code to read in and parse the file
 	ifstream in;
